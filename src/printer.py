@@ -1,15 +1,19 @@
+import parameters
+
 from typing import List
 
-SOLUTION_FILE = "solution.csv"
+from node import Solution
 
-def print_response(distance: float, node_order: List[int]):
-    print(distance)
-    
-    if len(node_order) <= 0:
+
+def print_response(solution: Solution):
+    print(solution.get_fitness())
+
+    if solution.get_length() <= 0:
         return
 
-    with open(SOLUTION_FILE, "w") as output_file:
+    with open(parameters.SOLUTION_FILE, "w") as output_file:
         seperator = ""
-        for id in node_order:
+        order = solution.get_order()
+        for id in order:
             output_file.write(seperator + str(id))
             seperator = "\n"
