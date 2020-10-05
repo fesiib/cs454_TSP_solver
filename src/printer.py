@@ -6,7 +6,7 @@ from node import Solution
 
 
 def print_response(solution: Solution):
-    print(solution.get_fitness())
+    print(solution.get_tour_length())
 
     if solution.get_length() <= 0:
         return

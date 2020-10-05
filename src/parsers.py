@@ -20,6 +20,9 @@ def parse_args(args):
         type=int,
         help="Maximum Number of Fitness Evaluations",
     )
+    parser.add_argument(
+        "-m", "--method", type=str, default="ga", help="local_search/ga"
+    )
     args = parser.parse_args(args)
     return args
 

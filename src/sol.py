@@ -10,6 +10,7 @@ from node import Node
 from node import Solution
 
 from local_searches import local_search_with_random
+from ga import ga_1
 
 from parsers import parse_input_data
 from parsers import parse_args
@@ -28,8 +29,13 @@ def main(args):
         print_response(solution)
         return
 
-    print_response(local_search_with_random(solution))
+    if args.method == "ga":
+        print_response(ga_1(solution))
+    else:
+        print_response(local_search_with_random(solution))
 
 
 if __name__ == "__main__":
+    x = 20000
+    sys.setrecursionlimit(x)
     main(parse_args(sys.argv[1:]))

@@ -10,14 +10,18 @@ from node import Solution
 
 
 def local_search_with_random(solution: Solution) -> Solution:
-    solution.get_fitness()
+    solution.get_tour_length()
+    generation = 0
     while parameters.MAX_FITNESS_EVALS > 0:
         new_solution = copy.deepcopy(solution)
         new_solution.shuffle()
         new_solution = local_search(new_solution)
-        if solution.get_fitness() > new_solution.get_fitness():
+        if solution.get_tour_length() > new_solution.get_tour_length():
             solution = new_solution
-        print(solution.get_fitness())
+        print(
+            "Generation #{}: {}".format(generation, solution.get_tour_length())
+        )
+        generation += 1
     return solution
 
 
@@ -29,11 +33,10 @@ def local_search(best_solution: Solution) -> Solution:
 
     while outer_iterations < parameters.MAX_ITERATIONS_NUM:
         outer_iterations += 1
-        # length = random.randint(2, max(2, best_nodes.get_length() / 3))
         length = random.randint(2, best_solution.get_length() - 2)
         mutation_left = None
 
-        best_fitness: float = best_solution.get_fitness()
+        best_fitness: float = best_solution.get_tour_length()
         inner_iterations = 0
         while inner_iterations < parameters.MAX_ITERATIONS_NUM:
             inner_iterations += 1
